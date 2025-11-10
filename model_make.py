@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import root_mean_squared_error
 import xgboost as xgb
 import matplotlib.pyplot as plt
 import optuna as op
@@ -8,7 +8,7 @@ import optuna as op
 
 def objective(trial):
     param = {
-        'max_depth': trial.suggest_int('max_depth', 3, 15),
+        'max_depth': trial.suggest_int('max_depth', 3, 10),
         'learning_rate': trial.suggest_float('learning_rate', 0.01, 0.1),
         'n_estimators': trial.suggest_int('n_estimators', 100, 1000),
         'subsample': trial.suggest_float('subsample', 0.5, 1.0),
@@ -24,11 +24,11 @@ def objective(trial):
     model = xgb.XGBRegressor(**param)
     model.fit(x_train, y_train)
     pred = model.predict(x_test)
-    return mean_squared_error(y_test, pred)
+    return root_mean_squared_error(y_test, pred)
 
 
 if __name__ == '__main__':
-    study = op.create_study(direction="maximize")
+    study = op.create_study(direction="minimize")
     study.optimize(objective, n_trials=100, timeout=600)
     print("Number of finished trials: ", len(study.trials))
     print("Best trial:")
