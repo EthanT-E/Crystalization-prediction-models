@@ -1,5 +1,4 @@
 import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import root_mean_squared_error, mean_absolute_error
@@ -20,8 +19,9 @@ filt_df = filt_df.drop(
              "Kappa2", 'Chi0', 'Chi0n', 'Chi0v', 'Chi1',
              'Chi1n', 'Chi1v', 'Chi2n', 'Chi2v', 'Chi3n',
              'Chi3v', 'Chi4v', 'HeavyAtomCount', 'LabuteASA',
-             'Ipc', 'MolWt', 'MolMR', 'NumValenceElectrons', 'NumRotatableBonds', 'Phi'])
-
+             'Ipc', 'MolWt', 'MolMR', 'NumValenceElectrons',
+             'NumRotatableBonds', 'Phi'])
+print(filt_corr[filt_df.columns.tolist()])
 x_train, x_test, y_train, y_test = train_test_split(
     filt_df, target_df["dHm"], test_size=0.3, train_size=0.7)
 model = XGBRegressor(max_depth=12)
