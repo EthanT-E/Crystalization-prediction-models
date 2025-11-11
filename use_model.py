@@ -35,5 +35,5 @@ output_df = output_df["NAME"]
 
 predict_df = pd.DataFrame([output_df, predicted])
 predict_df = predict_df.T
-predict_df.columns = ["name", "predicted dHm / kJ mol-1"]
+predict_df.columns = ["Name", "Predicted dHm / kJ mol-1"]
 predict_df.to_csv('output/dHm.csv', index=False)
