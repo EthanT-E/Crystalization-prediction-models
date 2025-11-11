@@ -1,3 +1,5 @@
+dHm model made: SMRE: 11.397835256784658, MAE 7.865075749939858
+
 optimized parameters multi-target[RMSE,MAE]:
   max_depth: 6-9 
     importance RMSE: 0.13(mid) MEA: 0.07(low)
