@@ -4,6 +4,7 @@ from sklearn.metrics import root_mean_squared_error, mean_absolute_error
 import xgboost as xgb
 import optuna as op
 import matplotlib.pyplot as plt
+import sys
 
 
 def objective(trial):
@@ -15,6 +16,8 @@ def objective(trial):
         'colsample_bytree': trial.suggest_float('colsample_bytree', 0.5, 1.0),
         'min_child_weight': trial.suggest_int('min_child_weight', 1, 10),
         'gamma': trial.suggest_float('gamma', 0, 5),
+        'alpha': trial.suggest_float('alpha', 1e-8, 1.0),
+        'tree_method': trial.suggest_categorical('tree_method', ['exact', 'hist', 'approx'])
     }
     target_df = pd.read_csv('data/Dataset_dHm.csv')
     desc_df = pd.read_csv('data/filt_desc.csv')
@@ -28,9 +31,13 @@ def objective(trial):
 
 
 if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        n_trials = 100
+    else:
+        n_trials = sys.argv[1]
     study = op.create_study(directions=["minimize", "minimize"])
     op.logging.set_verbosity(op.logging.WARNING)
-    study.optimize(objective, n_trials=500,
+    study.optimize(objective, n_trials=n_trials,
                    timeout=600, show_progress_bar=True)
     trials = study.best_trials
     best_trial_index = 0
@@ -50,5 +57,9 @@ if __name__ == '__main__':
     fig = op.visualization.matplotlib.plot_optimization_history(
         study, target=lambda t: t.values[0], target_name="SMRE")
     fig = op.visualization.matplotlib.plot_optimization_history(
+        study, target=lambda t: t.values[1], target_name="MAE")
+    fig = op.visualization.matplotlib.plot_param_importances(
+        study, target=lambda t: t.values[0], target_name="SMRE")
+    fig = op.visualization.matplotlib.plot_param_importances(
         study, target=lambda t: t.values[1], target_name="MAE")
     plt.show()
