@@ -1,0 +1,40 @@
+optimized parameters multi-target[RMSE,MAE]:
+  max_depth: 6-9 
+    importance RMSE: 0.13(mid) MEA: 0.07(low)
+
+  n_estimators: 136 
+    importance RMSE: 0.19(mid) MEA: 0.18(mid)
+  
+  learning rate: 0.01 - 0.05 
+    importance RMSE: 0.33(high) MEA: 0.39(high)
+  
+  subsample: 0.75-0.77 
+    importance RMSE: 0.1(mid) MEA: 0.06(low)
+  
+  colsmaple_bytree: 0.84 - 0.99 
+    importance RMSE: 0.10(mid) MEA: 0.23(high)
+  
+  min_child_weigth: 4-9 
+    doesn't matter importance RMSE: 0.02(low) MEA: 0.03(low)
+  
+  gamma: 1.84 or 4.09
+    importance RMSE: 0.07(low) MEA: 0.01(low)
+  
+  alpha: 0.54 - 0.7 
+    importance RMSE: 0.03(low) MEA: 0.02(low)
+  
+  tree_mehtod: doesn't matter importance 
+    RMSE: 0.02(low) MEA: >= 0.01(v.low)
+
+optimized for RMSE:
+  max_depth: 5
+  learning_rate: 0.022584517341217095
+  n_estimators: 429
+  subsample: 0.6151938971741792
+  colsample_bytree: 0.8811315729493638
+  min_child_weight: 7
+  gamma: 2.2323005631863024
+  alpha: 0.605735511492797
+  for importance look at notes_graphs/RMSE_optimized_hyperparameters
+optimiized for MAE:
+

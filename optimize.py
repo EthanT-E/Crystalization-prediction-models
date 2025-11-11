@@ -27,6 +27,7 @@ def objective(trial):
     model = xgb.XGBRegressor(**param)
     model.fit(x_train, y_train)
     pred = model.predict(x_test)
+#     return root_mean_squared_error(y_test, pred)
     return root_mean_squared_error(y_test, pred), mean_absolute_error(y_test, pred)
 
 
@@ -34,32 +35,29 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         n_trials = 100
     else:
-        n_trials = sys.argv[1]
+        n_trials = int(sys.argv[1])
     study = op.create_study(directions=["minimize", "minimize"])
+    # study = op.create_study()
     op.logging.set_verbosity(op.logging.WARNING)
     study.optimize(objective, n_trials=n_trials,
-                   timeout=600, show_progress_bar=True)
+                   timeout=720, show_progress_bar=True)
     trials = study.best_trials
     best_trial_index = 0
     min_rmse = 10000
-    for index in range(0, len(trials)):
-        rmse = trials[index].values[0]
-        if min_rmse > rmse:
-            best_trial_index = index
+    print("Best trials:")
+    for trial in trials:
+        print(f"  Value: {trial.values}")
+        print("  Params: ")
+        for key, value in trial.params.items():
+            print(f"    {key}: {value}")
 
-    best_trial = trials[best_trial_index]
-    print("Best trial:")
-    print(f"  Value: {best_trial.values}")
-    print("  Params: ")
-    for key, value in best_trial.params.items():
-        print(f"    {key}: {value}")
-
-    fig = op.visualization.matplotlib.plot_optimization_history(
-        study, target=lambda t: t.values[0], target_name="SMRE")
-    fig = op.visualization.matplotlib.plot_optimization_history(
-        study, target=lambda t: t.values[1], target_name="MAE")
-    fig = op.visualization.matplotlib.plot_param_importances(
-        study, target=lambda t: t.values[0], target_name="SMRE")
-    fig = op.visualization.matplotlib.plot_param_importances(
-        study, target=lambda t: t.values[1], target_name="MAE")
-    plt.show()
+    if len(sys.argv) == 2:
+        fig = op.visualization.matplotlib.plot_optimization_history(
+            study, target=lambda t: t.values[0], target_name="SMRE")
+        fig = op.visualization.matplotlib.plot_optimization_history(
+            study, target=lambda t: t.values[1], target_name="MAE")
+        fig = op.visualization.matplotlib.plot_param_importances(
+            study, target=lambda t: t.values[0], target_name="SMRE")
+        fig = op.visualization.matplotlib.plot_param_importances(
+            study, target=lambda t: t.values[1], target_name="MAE")
+        plt.show()
