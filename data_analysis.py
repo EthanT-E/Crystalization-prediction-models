@@ -1,8 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import root_mean_squared_error, mean_absolute_error
-from xgboost import XGBRegressor
 
 
 df = pd.read_csv("data/rdkit_unscaled.csv")
@@ -21,21 +17,3 @@ filt_df = filt_df.drop(
              'Ipc', 'MolWt', 'MolMR', 'NumValenceElectrons',
              'NumRotatableBonds', 'Phi'])
 filt_df.to_csv("data/filt_desc.csv", index=False)
-# x_train, x_test, y_train, y_test = train_test_split(
-#     filt_df, target_df["dHm"], test_size=0.3, train_size=0.7)
-# model = XGBRegressor(max_depth=12)
-# model.fit(x_train, y_train)
-# pred = model.predict(x_test)
-# results_df = pd.DataFrame()
-# results_df["true"] = y_test
-# results_df["predict"] = pred
-# results_df["residuals"] = results_df["true"] - results_df["predict"]
-#
-# print(f"Mean squared error: {root_mean_squared_error(y_test, pred)}")
-# print(f"Mean absoute error: {mean_absolute_error(y_test, pred)}")
-# results_df["residuals"].plot(style=".")
-# plt.show()
-# plt.scatter(x=results_df["true"], y=results_df["predict"])
-# plt.show()
-# sns.heatmap(filt_df.corr(method="spearman"), annot=True)
-# plt.show()
