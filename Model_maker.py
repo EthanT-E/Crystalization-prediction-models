@@ -22,11 +22,13 @@ def main():
                              )
     model.fit(x_train, y_train)
     pred = model.predict(x_test)
-    print(f"SRE: {root_mean_squared_error(y_test, pred)}, MAE {
+    print(f"SMRE: {root_mean_squared_error(y_test, pred)}, MAE {
           mean_absolute_error(y_test, pred)}")
-    download = input("Download Model? [yes/no]")
+    download = input("Download Model? [yes/no/exit]")
     if download == "yes":
-        dump(model, open("./models/dHm_model.pkl", "wb"))
+        model.save_model('models/dHm_model.json')
+        return False
+    elif download == 'exit':
         return False
     else:
         return True
