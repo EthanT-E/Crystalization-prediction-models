@@ -52,8 +52,6 @@ def main(Path_to_inputs, Output_File_Name='dHm_predicted.csv'):
 
 
 if __name__ == '__main__':
-    print(f"Usage: {
-          sys.argv[0]} <PATH_TO_INPUT_FILE> <NAME_OF_OUTPUT_FILE>\nBy Defualt output file is called dHm results")
     if len(sys.argv) == 2:
         main(sys.argv[1])
     elif len(sys.argv) == 3:
@@ -63,4 +61,6 @@ if __name__ == '__main__':
             output_file_name = sys.argv[2]
         main(sys.argv[1], output_file_name)
     else:
+        print(f"Usage: {
+              sys.argv[0]} <PATH_TO_INPUT_FILE> <NAME_OF_OUTPUT_FILE>\nBy Defualt output file is called dHm_results")
         print("Please input input file path")
