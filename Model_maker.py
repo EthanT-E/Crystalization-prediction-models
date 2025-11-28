@@ -57,7 +57,7 @@ def main(Path_to_Smiles_list='data/Smiles_dHm.csv', Path_to_desc_list='descripto
         plt.show()
     download = input("Download Model? [yes/exit] ")
     if download == "yes":
-        model.save_model('models/dHm_model_tsne.json')
+        model.save_model('models/dHm_model.json')
 
 
 if __name__ == '__main__':

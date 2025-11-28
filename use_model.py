@@ -31,7 +31,7 @@ def main(Path_to_inputs, Output_File_Name='dHm_predicted.csv'):
 
     # load model
     model = xgb.XGBRegressor()
-    model.load_model('models/dHm_model_tsne.json')
+    model.load_model('models/dHm_model.json')
     print('model loaded')
 
     # Set model column names
