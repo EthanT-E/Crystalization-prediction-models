@@ -48,7 +48,6 @@ def main(Path_to_inputs, Output_File_Name='dHm_predicted.csv'):
     predict_df.columns = ["Name", "Predicted dHm / kJ mol-1"]
     output_path = 'output/'+Output_File_Name
     predict_df.to_csv(output_path, index=False)
-    print('Output written\nFin')
 
 
 if __name__ == '__main__':
