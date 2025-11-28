@@ -8,7 +8,7 @@ import sys
 
 def main(Path_to_inputs, Output_File_Name='dHm_predicted.csv'):
     # Get the used descriptors
-    good_desc = pd.read_csv('descriptor/dhm_tsne.csv')
+    good_desc = pd.read_csv('descriptor/dhm_desc.csv')
     good_desc = good_desc.columns.to_list()
 
     # RDKit descriptor calculator made

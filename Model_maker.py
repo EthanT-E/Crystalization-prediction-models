@@ -11,7 +11,7 @@ import sys
 
 def Get_descriptor_df(Path_to_Smiles_list, Path_to_desc_list):
 
-    good_desc = pd.read_csv('descriptor/dhm_tsne.csv')
+    good_desc = pd.read_csv('descriptor/dhm_desc.csv')
     good_desc = good_desc.columns.to_list()
     calculator = MolecularDescriptorCalculator(good_desc)
     supplier = Chem.SmilesMolSupplier(
@@ -27,11 +27,11 @@ def Get_descriptor_df(Path_to_Smiles_list, Path_to_desc_list):
     return calced_desc_df
 
 
-def main(Path_to_Smiles_list='data/Smiles_dHm.csv', Path_to_desc_list='descriptor/dhm_tsne.csv', plotflag=0):
+def main(Path_to_Smiles_list='data/Smiles_dHm.csv', Path_to_desc_list='descriptor/dhm_desc.csv', plotflag=0):
     target_df = pd.read_csv('data/Dataset_dHm.csv')
     # desc_df = pd.read_csv('data/tsne_dhm_desc.
     # desc_df = Get_descriptor_df(
-    #    'data/Smiles_dHm.csv', 'descriptor/dhm_tsne.csv')
+    #    'data/Smiles_dHm.csv', 'descriptor/dhm_desc.csv')
     desc_df = Get_descriptor_df(
         Path_to_Smiles_list, Path_to_desc_list)
     x_train, x_test, y_train, y_test = train_test_split(
