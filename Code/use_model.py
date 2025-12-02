@@ -24,6 +24,7 @@ def main(Path_to_inputs, Output_File_Name='dHm_predicted.csv'):
     input_dic = []
     for mol in supplier:
         input_dic.append(calculator.CalcDescriptors(mol))
+    print("Descriptors calculated")
 
     # Calculate descriptors of inputs
     calced_desc_df = pd.DataFrame(input_dic)
